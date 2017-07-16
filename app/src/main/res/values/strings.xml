@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FlybounceMain_V01</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="tMemName">Member Name</string>
+    <string name="tNameHint">Name</string>
+    <string name="tMobileNo">Mobile..</string>
+    <string name="tdor">Registration Date</string>
+    <string name="tTime">Start Time</string>
+    <string name="tCourtAvail">Courts Available</string>
+</resources>
