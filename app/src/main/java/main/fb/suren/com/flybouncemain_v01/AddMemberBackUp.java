@@ -38,7 +38,7 @@ import main.fb.suren.com.flybouncemain_v01.database.Member;
  * Created by suren on 16/7/17.
  */
 
-public class AddMemberFragment extends Fragment{
+public class AddMemberBackUp extends Fragment{
 
     private DatabaseHelper databaseHelper = null;
     private Dao<Member,Integer> memberDAO;
@@ -91,7 +91,7 @@ public class AddMemberFragment extends Fragment{
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item,listHours);
 
-        spinner_TimeSelect.setAdapter(dataAdapter);
+
         try {
             memberDAO = getHelper().getMemberDAO();
         } catch (SQLException e) {
