@@ -26,10 +26,29 @@ public class Member {
     int mobile_number;
 
 
-    public Member(String member_name, int mobile_number) {
+    @DatabaseField
+    Date startDate;
+
+    @DatabaseField
+    Date endDate;
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", member_name='" + member_name + '\'' +
+                ", mobile_number=" + mobile_number +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
+    }
+
+    public Member(String member_name, int mobile_number, Date startDate, Date endDate) {
 
         this.member_name = member_name;
         this.mobile_number = mobile_number;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public Member() {

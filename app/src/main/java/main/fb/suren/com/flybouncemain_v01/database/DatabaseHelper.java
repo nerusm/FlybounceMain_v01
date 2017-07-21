@@ -22,7 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "fb_database.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     private static Dao<Member, Integer> memberDAO = null;
 
@@ -53,6 +53,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+        try {
+            TableUtils.createTable(connectionSource,Member.class);
+            Log.i(MainActivity.LOG_TAG,"Table Upgraded");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

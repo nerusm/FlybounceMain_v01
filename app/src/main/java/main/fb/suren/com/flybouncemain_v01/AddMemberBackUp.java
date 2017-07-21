@@ -106,7 +106,7 @@ public class AddMemberBackUp extends Fragment{
                 String name = editText_Membername.getText().toString();
                 String mobileNo = editText_MobileNumber.getText().toString();
                 int mobileInt = Integer.parseInt(mobileNo);
-                member = new Member(name,mobileInt);
+               // member = new Member(name,mobileInt);
                 try {
                     memberDAO.create(member);
                 } catch (SQLException e) {
