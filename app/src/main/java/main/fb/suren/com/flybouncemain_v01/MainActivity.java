@@ -19,9 +19,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static String LOG_TAG = "FB_TAG";
+    public static String TARGET_DATE_FORMAT = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        TARGET_DATE_FORMAT = getString(R.string.tDateFormat);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

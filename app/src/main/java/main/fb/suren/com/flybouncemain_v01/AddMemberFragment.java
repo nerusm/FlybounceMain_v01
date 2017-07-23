@@ -52,20 +52,25 @@ public class AddMemberFragment extends Fragment{
     EditText editText_MobileNumber;
     EditText editText_StartDate;
     EditText editText_MultiLine;
+
     Button buttonAddMember;
     Button buttonCheckAvailabilty;
     ImageButton buttonDatePicker;
     Spinner spinner_TimeSelect;
-RadioGroup radioGroupDuration;
+    RadioGroup radioGroupDuration;
     RadioButton radioButtonDurationSelected;
     Member member;
     List<String> listHours = new ArrayList<String>();
 
+
     private int mYear, mMonth, mDay, mHour, mMinute;
     private DatePickerDialog fromDatePickerDialog;
-    private SimpleDateFormat dateFormatter;
+    //private SimpleDateFormat dateFormatter;
     Date inputDate = null;
     Date endDate = null;
+    int startTime;
+
+    Utils myUtils;
 
     /** This handles the message send from DatePickerDialogFragment on setting date */
 
@@ -93,18 +98,22 @@ RadioGroup radioGroupDuration;
         editText_MobileNumber = (EditText) view.findViewById(R.id.editext_mobileno);
         editText_StartDate = (EditText) view.findViewById(R.id.editText_startdate);
         editText_MultiLine = (EditText) view.findViewById(R.id.editTextMultiLine);
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
+       // dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         spinner_TimeSelect = (Spinner) view.findViewById(R.id.spinnerTimeSelect);
         radioGroupDuration = (RadioGroup) view.findViewById(R.id.radioGroupDuration);
 
         final String inputString = "11-11-2012";
-        final DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+       //final DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        myUtils = new Utils();
 
 
         try {
-            Log.i(MainActivity.LOG_TAG,dateFormat.format(dateFormat.parse(inputString)));
+           // Log.i(MainActivity.LOG_TAG,dateFormat.format(dateFormat.parse(inputString)));
 
-            inputDate = dateFormat.parse(inputString);
+           //inputDate = dateFormat.parse(inputString);
+            inputDate = myUtils.stringToDate(inputString,getString(R.string.tInputDateFormat));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -140,22 +149,30 @@ RadioGroup radioGroupDuration;
                 int sel = radioGroupDuration.getCheckedRadioButtonId();
                 radioButtonDurationSelected = (RadioButton) getActivity().findViewById(sel);
                 String durationString = radioButtonDurationSelected.getText().toString();
+                startTime = Integer.parseInt( spinner_TimeSelect.getSelectedItem().toString());
+
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(inputDate);
                 if(durationString.equalsIgnoreCase(getString(R.string.tDurationMonthly))){
-                    calendar.add(Calendar.DAY_OF_YEAR,30);
-                    Log.i(MainActivity.LOG_TAG,calendar.toString());
+                    calendar.add(Calendar.MONTH,1);
+
+                } else if(durationString.equalsIgnoreCase(getString(R.string.tDurationQuarterly))){
+                    calendar.add(Calendar.MONTH,3);
+                } else if(durationString.equalsIgnoreCase(getString(R.string.tDurationYearly))){
+                    calendar.add(Calendar.YEAR,1);
                 }
+
+                Log.i(MainActivity.LOG_TAG,calendar.toString());
                 endDate = calendar.getTime();
-                try {
+                /*try {
                     endDate = dateFormat.parse( dateFormat.format(endDate));
                     Log.i(MainActivity.LOG_TAG,durationString + "- " + dateFormat.parse( dateFormat.format(endDate)));
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 int mobileInt = Integer.parseInt(mobileNo);
-                member = new Member(name,mobileInt,inputDate,endDate);
+                member = new Member(name,mobileInt,inputDate,endDate, startTime, getString(R.string.tDateFormat));
 
                 try {
                     memberDAO.create(member);

@@ -14,4 +14,6 @@
     <string name="tDurationMonthly">Monthly</string>
     <string name="tDurationQuarterly">Quarterly</string>
     <string name="tDurationYearly">Yearly</string>
+    <string name="tDateFormat">dd-MMM-yyyy</string>
+    <string name="tInputDateFormat">dd-MM-yyyy</string>
 </resources>
