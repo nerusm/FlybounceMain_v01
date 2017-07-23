@@ -57,10 +57,13 @@ public class AddMemberFragment extends Fragment{
     Button buttonCheckAvailabilty;
     ImageButton buttonDatePicker;
     Spinner spinner_TimeSelect;
+    Spinner spinner_CourtSelect;
     RadioGroup radioGroupDuration;
     RadioButton radioButtonDurationSelected;
+
     Member member;
     List<String> listHours = new ArrayList<String>();
+
 
 
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -69,6 +72,7 @@ public class AddMemberFragment extends Fragment{
     Date inputDate = null;
     Date endDate = null;
     int startTime;
+    int courtNo;
 
     Utils myUtils;
 
@@ -101,6 +105,7 @@ public class AddMemberFragment extends Fragment{
 
        // dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         spinner_TimeSelect = (Spinner) view.findViewById(R.id.spinnerTimeSelect);
+        spinner_CourtSelect = (Spinner) view.findViewById(R.id.spinnerCourtSelect);
         radioGroupDuration = (RadioGroup) view.findViewById(R.id.radioGroupDuration);
 
         final String inputString = "11-11-2012";
@@ -126,6 +131,10 @@ public class AddMemberFragment extends Fragment{
                 android.R.layout.simple_spinner_item,listHours);
 
         spinner_TimeSelect.setAdapter(dataAdapter);
+
+        for(int i = 1; i<=3;i++){
+
+        }
         try {
             memberDAO = getHelper().getMemberDAO();
         } catch (SQLException e) {
@@ -150,6 +159,7 @@ public class AddMemberFragment extends Fragment{
                 radioButtonDurationSelected = (RadioButton) getActivity().findViewById(sel);
                 String durationString = radioButtonDurationSelected.getText().toString();
                 startTime = Integer.parseInt( spinner_TimeSelect.getSelectedItem().toString());
+                courtNo = Integer.parseInt(spinner_CourtSelect.getSelectedItem().toString());
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(inputDate);
@@ -172,7 +182,8 @@ public class AddMemberFragment extends Fragment{
                 }*/
 
                 int mobileInt = Integer.parseInt(mobileNo);
-                member = new Member(name,mobileInt,inputDate,endDate, startTime, getString(R.string.tDateFormat));
+                member = new Member(name,mobileInt,inputDate,endDate, startTime, courtNo,
+                        getString(R.string.tDateFormat));
 
                 try {
                     memberDAO.create(member);

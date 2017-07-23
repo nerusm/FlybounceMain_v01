@@ -34,13 +34,16 @@ public class Member {
     @Column(length = 2,nullable = false)
     int startTime;
 
+    @Column(length = 2, nullable = false)
+    int courtNo;
+
     @DatabaseField
     Date startDate;
 
     @DatabaseField
     Date endDate;
 
-    public Member(String member_name, int mobile_number, Date startDate, Date endDate, int startTime, String targetDatePattern) {
+    public Member(String member_name, int mobile_number, Date startDate, Date endDate, int startTime, int courtNo, String targetDatePattern) {
 
         this.targetDatePattern = targetDatePattern;
         this.member_name = member_name;
@@ -48,6 +51,7 @@ public class Member {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
+        this.courtNo = courtNo;
     }
 
     @Override

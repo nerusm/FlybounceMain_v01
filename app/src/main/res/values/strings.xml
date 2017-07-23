@@ -16,4 +16,10 @@
     <string name="tDurationYearly">Yearly</string>
     <string name="tDateFormat">dd-MMM-yyyy</string>
     <string name="tInputDateFormat">dd-MM-yyyy</string>
+
+    <string-array name="CourtArray">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>
