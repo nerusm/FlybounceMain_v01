@@ -226,6 +226,12 @@
                 android:layout_height="wrap_content"
                 android:text="Add" />
 
+            <Button
+                android:id="@+id/button_tempDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
         </TableRow>
 
         <TableRow

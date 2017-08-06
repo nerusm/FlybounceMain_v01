@@ -1,10 +1,8 @@
 package main.fb.suren.com.flybouncemain_v01;
 
 import android.app.DatePickerDialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -27,26 +24,25 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
 import main.fb.suren.com.flybouncemain_v01.database.Member;
+import main.fb.suren.com.flybouncemain_v01.database.Notifications;
 
 /**
  * Created by suren on 16/7/17.
  */
 
-public class AddMemberFragment extends Fragment{
+public class AddMemberFragment extends Fragment implements MyDialogFragment.UserNameListener{
 
     private DatabaseHelper databaseHelper = null;
     private Dao<Member,Integer> memberDAO;
+    private Dao<Notifications,Integer> notificationsDao;
 
     EditText editText_Membername;
     EditText editText_MobileNumber;
@@ -55,13 +51,15 @@ public class AddMemberFragment extends Fragment{
 
     Button buttonAddMember;
     Button buttonCheckAvailabilty;
+    Button buttonTempDisplay;
     ImageButton buttonDatePicker;
     Spinner spinner_TimeSelect;
     Spinner spinner_CourtSelect;
     RadioGroup radioGroupDuration;
     RadioButton radioButtonDurationSelected;
 
-    Member member;
+     Member member;
+    Notifications notifications;
     List<String> listHours = new ArrayList<String>();
 
 
@@ -98,6 +96,7 @@ public class AddMemberFragment extends Fragment{
         buttonAddMember = (Button) view.findViewById(R.id.button_addMember);
         buttonDatePicker = (ImageButton) view.findViewById(R.id.button_DatePicker);
         buttonCheckAvailabilty = (Button) view.findViewById(R.id.button_courtsAvailable);
+        buttonTempDisplay = (Button) view.findViewById(R.id.button_tempDisplay);
         editText_Membername = (EditText) view.findViewById(R.id.edittext_membername);
         editText_MobileNumber = (EditText) view.findViewById(R.id.editext_mobileno);
         editText_StartDate = (EditText) view.findViewById(R.id.editText_startdate);
@@ -131,22 +130,40 @@ public class AddMemberFragment extends Fragment{
                 android.R.layout.simple_spinner_item,listHours);
 
         spinner_TimeSelect.setAdapter(dataAdapter);
-
-        for(int i = 1; i<=3;i++){
-
-        }
         try {
             memberDAO = getHelper().getMemberDAO();
+            notificationsDao = getHelper().getNotificationsDAO();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
+
+        buttonTempDisplay.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                populateViewNotify(notificationsDao);
+            }
+        });
+
         buttonCheckAvailabilty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(MainActivity.LOG_TAG,"Populate");
-                populateView(memberDAO);
+                populateViewMember(memberDAO);
+                FragmentManager manager  = getFragmentManager();
+                Fragment fragment = manager.findFragmentByTag("fragment_dialog");
+                if(fragment != null){
+                    manager.beginTransaction().remove(fragment).commit();
+                }
+
+                Bundle args = new Bundle();
+                args.putString("resultString", "Court Not available");
+
+                MyDialogFragment myDialogFragment = new MyDialogFragment();
+                myDialogFragment.setArguments(args);
+                myDialogFragment.show(manager,"fragment_dialog");
             }
         });
 //        buttonDatePicker.setOnClickListener(this);
@@ -182,10 +199,18 @@ public class AddMemberFragment extends Fragment{
                 }*/
 
                 int mobileInt = Integer.parseInt(mobileNo);
-                member = new Member(name,mobileInt,inputDate,endDate, startTime, courtNo,
-                        getString(R.string.tDateFormat));
+
+                String memberID = new GenerationClass().formMemberID(name,durationString);
+
+                notifications = new Notifications(memberID,endDate);
+
+
+
+                member = new Member(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
+                        getString(R.string.tDateFormat),notifications);
 
                 try {
+                    notificationsDao.create(notifications);
                     memberDAO.create(member);
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -200,7 +225,21 @@ public class AddMemberFragment extends Fragment{
         return view;
     }
 
-    private void populateView(Dao<Member, Integer> memberDAO) {
+    private void populateViewNotify(Dao<Notifications, Integer> notificationsDao){
+        try{
+            List<Notifications> notificationsList = notificationsDao.queryForAll();
+            StringBuffer sb = new StringBuffer("NOTIFY:\n");
+            for(int i = notificationsList.size()-1; i >=0; i--){
+                sb = sb.append(notificationsList.get(i).toString());
+            }
+            Log.i(MainActivity.LOG_TAG,sb.toString());
+            editText_MultiLine.setText(sb.toString());
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void populateViewMember(Dao<Member, Integer> memberDAO) {
         try {
             List<Member> listOfMembers = memberDAO.queryForAll();
             Log.i(MainActivity.LOG_TAG,"Size: "+listOfMembers.size());
@@ -236,5 +275,17 @@ public class AddMemberFragment extends Fragment{
 
 
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
 
+    @Override
+    public void onFinishUserDialog(String user) {
+        Toast.makeText(getActivity(), "Hello, " + user, Toast.LENGTH_SHORT).show();
+    }
 }

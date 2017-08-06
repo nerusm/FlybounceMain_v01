@@ -22,15 +22,23 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "fb_database_beta.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static Dao<Member, Integer> memberDAO = null;
+    private static Dao<Notifications, Integer> notificationsDAO = null;
 
     public  Dao<Member, Integer> getMemberDAO() throws SQLException {
         if(memberDAO == null){
             memberDAO = getDao(Member.class);
         }
         return memberDAO;
+    }
+
+    public Dao<Notifications, Integer> getNotificationsDAO() throws SQLException{
+        if(notificationsDAO == null){
+            notificationsDAO = getDao(Notifications.class);
+        }
+        return notificationsDAO;
     }
 
 
@@ -44,7 +52,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         try {
             TableUtils.createTable(connectionSource,Member.class);
-            Log.i(MainActivity.LOG_TAG,"Table Created");
+            Log.i(MainActivity.LOG_TAG,"Member Table Created");
+            TableUtils.createTable(connectionSource,Notifications.class);
+            Log.i(MainActivity.LOG_TAG,"Notification Tble created");
         } catch (SQLException e) {
             e.printStackTrace();
         }
