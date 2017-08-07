@@ -40,15 +40,30 @@ public class SendNotificationSMS  extends Service{
                 List<Member> membersList = memberDAO.queryBuilder().where().eq("memberID",notification.getMemberID()).query();
                 for (int j = 0; j < membersList.size(); j++){
                     int mobileNo = membersList.get(j).getMobile_number();
-                    Log.i(MainActivity.LOG_TAG,"M:"+mobileNo);
+                    sendSMS(mobileNo,membersList.get(j).getEndDate().toString());
                 }
-Log.i(MainActivity.LOG_TAG,"Size:"+membersList.size());
+                    Log.i(MainActivity.LOG_TAG,"Size:"+membersList.size());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public void sendSMS(int mobileNo,String renewalDate){
+        Log.i(MainActivity.LOG_TAG,"SMS Sent to "+mobileNo);
+        Log.i(MainActivity.LOG_TAG,formSMSText(renewalDate));
+    }
+
+    public void updateNotificationStatus(String memberID){
+        Log.i(MainActivity.LOG_TAG,"Status Updated "+memberID);
+    }
+
+    public String formSMSText(String renewalDate){
+        String tempResource = getResources().getString(R.string.SMSBody);
+        String smsString = tempResource.replaceAll(getResources().getString(R.string.RENEWAL_DATE_REPLACE_STRING), renewalDate);
+        smsString = smsString.replaceAll(getResources().getString(R.string.BANK_DETAILS_REPLACE_STRING),getResources().getString(R.string.bankDetails));
+        return smsString;
+    }
     protected DatabaseHelper getHelper() {
         if (databaseHelper == null) {
             databaseHelper =

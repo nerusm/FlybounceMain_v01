@@ -17,11 +17,21 @@
     <string name="tDateFormat">dd-MMM-yyyy</string>
     <string name="tInputDateFormat">dd-MM-yyyy</string>
 
+
+    <string name="RENEWAL_DATE_REPLACE_STRING">#RENEWAL_DATE#</string>
+    <string name="BANK_DETAILS_REPLACE_STRING">#BANK_DETAILS#</string>
     <!--*** Below properties Has to go into Settings page-->
 
     <integer name="notification_timeOf_day">20</integer>
     <integer name="notification_advance_days">5</integer>
     <integer name="notification_interval_days">2</integer>
+
+    <string name="SMSBody">Dear Member, Your membership is coming up for renewal on #RENEWAL_DATE#.
+                            Please share payment reference. Please find the bank details
+                            #BANK_DETAILS#</string>
+    <string name="bankDetails">FLYBOUNCE SPORTS LLP
+Current Ac no : 313205000044
+IFSC Code : ICIC0003132</string>
 
     <!--*** Above properties Has to go into Settings page-->
 
