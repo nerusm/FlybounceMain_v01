@@ -1,8 +1,11 @@
 package main.fb.suren.com.flybouncemain_v01;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +37,8 @@ import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
 import main.fb.suren.com.flybouncemain_v01.database.Member;
 import main.fb.suren.com.flybouncemain_v01.database.Notifications;
 
+import static android.content.Context.ALARM_SERVICE;
+
 /**
  * Created by suren on 16/7/17.
  */
@@ -52,6 +57,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     Button buttonAddMember;
     Button buttonCheckAvailabilty;
     Button buttonTempDisplay;
+    Button buttonTempSetAlarm;
     ImageButton buttonDatePicker;
     Spinner spinner_TimeSelect;
     Spinner spinner_CourtSelect;
@@ -61,6 +67,8 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
      Member member;
     Notifications notifications;
     List<String> listHours = new ArrayList<String>();
+
+    private PendingIntent pendingIntent;
 
 
 
@@ -97,6 +105,13 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         buttonDatePicker = (ImageButton) view.findViewById(R.id.button_DatePicker);
         buttonCheckAvailabilty = (Button) view.findViewById(R.id.button_courtsAvailable);
         buttonTempDisplay = (Button) view.findViewById(R.id.button_tempDisplay);
+        buttonTempSetAlarm = (Button) view.findViewById(R.id.button_tempSetAlarm);
+        buttonTempSetAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAlarm();
+            }
+        });
         editText_Membername = (EditText) view.findViewById(R.id.edittext_membername);
         editText_MobileNumber = (EditText) view.findViewById(R.id.editext_mobileno);
         editText_StartDate = (EditText) view.findViewById(R.id.editText_startdate);
@@ -202,12 +217,13 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
                 String memberID = new GenerationClass().formMemberID(name,durationString);
 
-                notifications = new Notifications(memberID,endDate);
+
+                notifications = new Notifications(memberID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
 
 
 
                 member = new Member(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
-                        getString(R.string.tDateFormat),notifications);
+                        getString(R.string.tDateFormat),notifications,0);
 
                 try {
                     notificationsDao.create(notifications);
@@ -223,6 +239,33 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
 
         return view;
+    }
+
+
+    private void setAlarm(){
+        Intent myIntent = new Intent(getActivity(),SendNotificationSMS.class);
+        Bundle bundle = new Bundle();
+        bundle.putCharSequence("extraSmsNumber", "0000");
+        bundle.putCharSequence("extraSmsText", "hi");
+        myIntent.putExtras(bundle);
+
+        pendingIntent = PendingIntent.getService(getActivity(),0,myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.add(Calendar.SECOND, 10);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+        Toast.makeText(getActivity(),
+                "Start Alarm with \n" +
+                        "smsNumber = " + "\"0000\"" + "\n" +
+                        "smsText = " + "Hi",
+                Toast.LENGTH_LONG).show();
+
+
+
     }
 
     private void populateViewNotify(Dao<Notifications, Integer> notificationsDao){

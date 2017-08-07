@@ -85,4 +85,48 @@ public class Member {
     public Member() {
 
     }
+
+    public String getTargetDatePattern() {
+        return targetDatePattern;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+    public String getMember_name() {
+        return member_name;
+    }
+
+    public int getMobile_number() {
+        return mobile_number;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public int getCourtNo() {
+        return courtNo;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public int getRenewalCount() {
+        return renewalCount;
+    }
+
+    public Notifications getNotifications() {
+        return notifications;
+    }
 }

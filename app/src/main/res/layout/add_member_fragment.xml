@@ -232,6 +232,12 @@
                 android:layout_height="wrap_content"
                 android:text="Button" />
 
+            <Button
+                android:id="@+id/button_tempSetAlarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Alarm" />
+
         </TableRow>
 
         <TableRow

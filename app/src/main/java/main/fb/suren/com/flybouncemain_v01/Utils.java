@@ -1,7 +1,11 @@
 package main.fb.suren.com.flybouncemain_v01;
 
+import android.app.Activity;
+import android.app.PendingIntent;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,4 +23,15 @@ public class Utils {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.parse(inString);
     }
+
+    public static Date subtractDate(Date inDate, int noOfDays){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(inDate);
+
+        calendar.add(Calendar.DATE, noOfDays);
+
+        return calendar.getTime();
+    }
+
+
 }

@@ -17,6 +17,14 @@
     <string name="tDateFormat">dd-MMM-yyyy</string>
     <string name="tInputDateFormat">dd-MM-yyyy</string>
 
+    <!--*** Below properties Has to go into Settings page-->
+
+    <integer name="notification_timeOf_day">20</integer>
+    <integer name="notification_advance_days">5</integer>
+    <integer name="notification_interval_days">2</integer>
+
+    <!--*** Above properties Has to go into Settings page-->
+
     <string-array name="TimeArray">
         <item>5</item>
         <item>6</item>

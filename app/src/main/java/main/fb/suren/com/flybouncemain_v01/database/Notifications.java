@@ -28,11 +28,15 @@ public class Notifications {
     @DatabaseField
     Date notificationDate;
 
+
     @DatabaseField
     int noOfNotiticationsSent;
 
+
     @DatabaseField
     boolean sendNotification;
+
+
 
     public Notifications(String memberID, Date notificationDate, int noOfNotiticationsSent, boolean sendNotification) {
         this.memberID = memberID;
@@ -51,5 +55,25 @@ public class Notifications {
     }
 
     public Notifications() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getMemberID() {
+        return memberID;
+    }
+
+    public Date getNotificationDate() {
+        return notificationDate;
+    }
+
+    public int getNoOfNotiticationsSent() {
+        return noOfNotiticationsSent;
+    }
+
+    public boolean isSendNotification() {
+        return sendNotification;
     }
 }
