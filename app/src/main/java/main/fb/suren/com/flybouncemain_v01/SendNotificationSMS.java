@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Member;
+import main.fb.suren.com.flybouncemain_v01.database.Memberships;
 import main.fb.suren.com.flybouncemain_v01.database.Notifications;
 
 
@@ -29,20 +28,20 @@ public class SendNotificationSMS  extends Service{
     String smsNumberToSend, smsTextToSend;
 
     private DatabaseHelper databaseHelper = null;
-    private Dao<Member,Integer> memberDAO;
+    private Dao<Memberships,Integer> membershipDAO;
     private Dao<Notifications,Integer> notificationsDao;
 
     public void getAllNotitifications(){
         try {
             List<Notifications> notificationsList = notificationsDao.queryForAll();
             for(int i = notificationsList.size()-1; i >=0; i--){
-                Notifications notification = notificationsList.get(i);
-                List<Member> membersList = memberDAO.queryBuilder().where().eq("memberID",notification.getMemberID()).query();
+                /*Notifications notification = notificationsList.get(i);
+                List<Memberships> membersList = membershipDAO.queryBuilder().where().eq("memberID",notification.getMemberID()).query();
                 for (int j = 0; j < membersList.size(); j++){
                     int mobileNo = membersList.get(j).getMobile_number();
                     sendSMS(mobileNo,membersList.get(j).getEndDate().toString());
                 }
-                    Log.i(MainActivity.LOG_TAG,"Size:"+membersList.size());
+                    Log.i(MainActivity.LOG_TAG,"Size:"+membersList.size());*/
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,7 +113,7 @@ public class SendNotificationSMS  extends Service{
 
         try {
             notificationsDao = getHelper().getNotificationsDAO();
-            memberDAO = getHelper().getMemberDAO();
+            membershipDAO = getHelper().getMembershipDAO();
         } catch (SQLException e) {
             e.printStackTrace();
         }

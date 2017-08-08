@@ -62,4 +62,12 @@ IFSC Code : ICIC0003132</string>
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string-array name="Plan_names">
+        <item>WEEKDAYS</item>
+        <item>WEEKENDS</item>
+        <item>ALLDAYS</item>
+    </string-array>
+
+
 </resources>

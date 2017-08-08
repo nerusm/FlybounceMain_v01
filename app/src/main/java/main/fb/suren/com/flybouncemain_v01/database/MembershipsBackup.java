@@ -7,16 +7,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import main.fb.suren.com.flybouncemain_v01.MainActivity;
-import main.fb.suren.com.flybouncemain_v01.Utils;
-
 
 /**
  * Created by suren on 17/7/17.
  */
 
-@Entity(name = "members")
-public class Member {
+@Entity(name = "memberships")
+public class MembershipsBackup {
 
     //Utils myUtils = new Utils();
     String targetDatePattern;
@@ -52,7 +49,7 @@ public class Member {
     @DatabaseField(canBeNull = false, foreign = true)
     Notifications notifications;
 
-    public Member(String memberID,String member_name, int mobile_number, Date startDate, Date endDate, int startTime, int courtNo, String targetDatePattern,Notifications notifications, int renewalCount) {
+    public MembershipsBackup(String memberID, String member_name, int mobile_number, Date startDate, Date endDate, int startTime, int courtNo, String targetDatePattern, Notifications notifications, int renewalCount) {
 
         this.targetDatePattern = targetDatePattern;
         this.member_name = member_name;
@@ -69,7 +66,7 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return "Memberships{" +
                 //"myUtils=" + myUtils +
                 ", targetDatePattern='" + targetDatePattern + '\'' +
                 ", id=" + id +
@@ -82,7 +79,7 @@ public class Member {
                 '}';
     }
 
-    public Member() {
+    public MembershipsBackup() {
 
     }
 

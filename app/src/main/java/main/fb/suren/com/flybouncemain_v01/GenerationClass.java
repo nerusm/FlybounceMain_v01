@@ -18,8 +18,11 @@ public class GenerationClass {
     }
 
 
-    public String formMemberID(String name, String planDuration){
-        return name+planDuration+String.valueOf(calendar.getTimeInMillis());
+    public String formMemberID(String name, String mobile_no){
+        return name+"_"+mobile_no;
+    }
 
+    public String formMembershipID(String memberID, String planName ){
+        return memberID+"_"+planName;
     }
 }

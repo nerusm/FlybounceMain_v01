@@ -34,7 +34,8 @@ import java.util.Date;
 import java.util.List;
 
 import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Member;
+import main.fb.suren.com.flybouncemain_v01.database.Members;
+import main.fb.suren.com.flybouncemain_v01.database.Memberships;
 import main.fb.suren.com.flybouncemain_v01.database.Notifications;
 
 import static android.content.Context.ALARM_SERVICE;
@@ -46,7 +47,7 @@ import static android.content.Context.ALARM_SERVICE;
 public class AddMemberFragment extends Fragment implements MyDialogFragment.UserNameListener{
 
     private DatabaseHelper databaseHelper = null;
-    private Dao<Member,Integer> memberDAO;
+    private Dao<Memberships,Integer> membershipsesDAO;
     private Dao<Notifications,Integer> notificationsDao;
 
     EditText editText_Membername;
@@ -61,10 +62,14 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     ImageButton buttonDatePicker;
     Spinner spinner_TimeSelect;
     Spinner spinner_CourtSelect;
+    Spinner spinner_PlanSelect;
     RadioGroup radioGroupDuration;
     RadioButton radioButtonDurationSelected;
 
-     Member member;
+
+
+    Members members;
+    Memberships memberships;
     Notifications notifications;
     List<String> listHours = new ArrayList<String>();
 
@@ -79,6 +84,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     Date endDate = null;
     int startTime;
     int courtNo;
+    String planName;
 
     Utils myUtils;
 
@@ -120,6 +126,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
        // dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         spinner_TimeSelect = (Spinner) view.findViewById(R.id.spinnerTimeSelect);
         spinner_CourtSelect = (Spinner) view.findViewById(R.id.spinnerCourtSelect);
+        spinner_PlanSelect = (Spinner) view.findViewById(R.id.spinner_PlanSelect);
         radioGroupDuration = (RadioGroup) view.findViewById(R.id.radioGroupDuration);
 
         final String inputString = "11-11-2012";
@@ -146,7 +153,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
         spinner_TimeSelect.setAdapter(dataAdapter);
         try {
-            memberDAO = getHelper().getMemberDAO();
+            membershipsesDAO = getHelper().getMembershipDAO();
             notificationsDao = getHelper().getNotificationsDAO();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,7 +173,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
             @Override
             public void onClick(View view) {
                 Log.i(MainActivity.LOG_TAG,"Populate");
-                populateViewMember(memberDAO);
+                populateViewMember(membershipsesDAO);
                 FragmentManager manager  = getFragmentManager();
                 Fragment fragment = manager.findFragmentByTag("fragment_dialog");
                 if(fragment != null){
@@ -192,7 +199,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
                 String durationString = radioButtonDurationSelected.getText().toString();
                 startTime = Integer.parseInt( spinner_TimeSelect.getSelectedItem().toString());
                 courtNo = Integer.parseInt(spinner_CourtSelect.getSelectedItem().toString());
-
+                planName = spinner_PlanSelect.getSelectedItem().toString();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(inputDate);
                 if(durationString.equalsIgnoreCase(getString(R.string.tDurationMonthly))){
@@ -215,19 +222,22 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
                 int mobileInt = Integer.parseInt(mobileNo);
 
-                String memberID = new GenerationClass().formMemberID(name,durationString);
+
+                String memberID = new GenerationClass().formMemberID(name,mobileNo);
+                String membershipID = new GenerationClass().formMembershipID(memberID,planName);
+
+                members = new Members(memberID,name,mobileNo);
+                notifications = new Notifications(membershipID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
+                memberships = new Memberships();
 
 
-                notifications = new Notifications(memberID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
+             /*   memberships = new Memberships(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
+                        getString(R.string.tDateFormat),notifications,0);*/
 
-
-
-                member = new Member(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
-                        getString(R.string.tDateFormat),notifications,0);
 
                 try {
                     notificationsDao.create(notifications);
-                    memberDAO.create(member);
+                    membershipsesDAO.create(memberships);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -282,9 +292,9 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         }
     }
 
-    private void populateViewMember(Dao<Member, Integer> memberDAO) {
+    private void populateViewMember(Dao<Memberships, Integer> memberDAO) {
         try {
-            List<Member> listOfMembers = memberDAO.queryForAll();
+            List<Memberships> listOfMembers = memberDAO.queryForAll();
             Log.i(MainActivity.LOG_TAG,"Size: "+listOfMembers.size());
             StringBuffer sb = new StringBuffer("START-\n");
             for (int i = listOfMembers.size()-1;i>=0;i--){

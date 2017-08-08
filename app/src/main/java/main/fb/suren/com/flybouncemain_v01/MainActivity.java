@@ -20,15 +20,18 @@ public class MainActivity extends AppCompatActivity
 
     public static String LOG_TAG = "FB_TAG";
     public static String TARGET_DATE_FORMAT = "";
+    public static String[] plansArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         TARGET_DATE_FORMAT = getString(R.string.tDateFormat);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        plansArray = getResources().getStringArray(R.array.Plan_names);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
