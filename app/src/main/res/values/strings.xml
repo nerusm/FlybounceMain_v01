@@ -32,6 +32,8 @@
     <string name="bankDetails">FLYBOUNCE SPORTS LLP
 Current Ac no : 313205000044
 IFSC Code : ICIC0003132</string>
+    <string name="search_title">Search Member</string>
+    <string name="search_hint">Enter name</string>
 
     <!--*** Above properties Has to go into Settings page-->
 
