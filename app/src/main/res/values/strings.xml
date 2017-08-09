@@ -16,6 +16,7 @@
     <string name="tDurationYearly">Yearly</string>
     <string name="tDateFormat">dd-MMM-yyyy</string>
     <string name="tInputDateFormat">dd-MM-yyyy</string>
+    <string name="tRenewal_Date_String">Renewal Date: </string>
 
 
     <string name="RENEWAL_DATE_REPLACE_STRING">#RENEWAL_DATE#</string>

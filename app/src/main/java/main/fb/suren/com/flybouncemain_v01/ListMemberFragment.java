@@ -27,6 +27,7 @@ public class ListMemberFragment extends Fragment{
 
     private DatabaseHelper databaseHelper = null;
     private Dao<Members, Integer> membersDao;
+    private Dao<Memberships,Integer> membershipsesDAO;
     private ListView listView;
 
     @Nullable
@@ -46,6 +47,8 @@ public class ListMemberFragment extends Fragment{
 
         return view;
     }
+
+
 
 
     @Override
