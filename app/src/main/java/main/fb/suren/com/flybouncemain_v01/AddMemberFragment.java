@@ -49,6 +49,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     private DatabaseHelper databaseHelper = null;
     private Dao<Memberships,Integer> membershipsesDAO;
     private Dao<Notifications,Integer> notificationsDao;
+    private Dao<Members, Integer> membersDao;
 
     EditText editText_Membername;
     EditText editText_MobileNumber;
@@ -155,6 +156,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         try {
             membershipsesDAO = getHelper().getMembershipDAO();
             notificationsDao = getHelper().getNotificationsDAO();
+            membersDao = getHelper().getMembersDAO();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -200,15 +202,19 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
                 startTime = Integer.parseInt( spinner_TimeSelect.getSelectedItem().toString());
                 courtNo = Integer.parseInt(spinner_CourtSelect.getSelectedItem().toString());
                 planName = spinner_PlanSelect.getSelectedItem().toString();
+                int durationMonthsInt = 1;
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(inputDate);
                 if(durationString.equalsIgnoreCase(getString(R.string.tDurationMonthly))){
                     calendar.add(Calendar.MONTH,1);
+                    durationMonthsInt = 1;
 
                 } else if(durationString.equalsIgnoreCase(getString(R.string.tDurationQuarterly))){
                     calendar.add(Calendar.MONTH,3);
+                    durationMonthsInt = 3;
                 } else if(durationString.equalsIgnoreCase(getString(R.string.tDurationYearly))){
                     calendar.add(Calendar.YEAR,1);
+                    durationMonthsInt = 12;
                 }
 
                 Log.i(MainActivity.LOG_TAG,calendar.toString());
@@ -225,10 +231,10 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
                 String memberID = new GenerationClass().formMemberID(name,mobileNo);
                 String membershipID = new GenerationClass().formMembershipID(memberID,planName);
-
+//public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications) {
                 members = new Members(memberID,name,mobileNo);
                 notifications = new Notifications(membershipID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
-                memberships = new Memberships();
+                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications);
 
 
              /*   memberships = new Memberships(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
@@ -236,8 +242,10 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
 
                 try {
+                    membersDao.create(members);
                     notificationsDao.create(notifications);
                     membershipsesDAO.create(memberships);
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
