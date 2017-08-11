@@ -234,7 +234,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 //public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications) {
                 members = new Members(memberID,name,mobileNo);
                 notifications = new Notifications(membershipID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
-                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications);
+                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications,durationString, true);
 
 
              /*   memberships = new Memberships(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
@@ -328,10 +328,10 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (databaseHelper != null) {
+    /*    if (databaseHelper != null) {
             OpenHelperManager.releaseHelper();
             databaseHelper = null;
-        }
+        }*/
     }
 
 
@@ -339,10 +339,10 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     @Override
     public void onStop() {
         super.onStop();
-        if (databaseHelper != null) {
+       /* if (databaseHelper != null) {
             OpenHelperManager.releaseHelper();
             databaseHelper = null;
-        }
+        }*/
     }
 
     @Override

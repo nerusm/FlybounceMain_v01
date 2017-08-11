@@ -52,6 +52,13 @@ public class Memberships {
     @Column
     int duration_months;
 
+    @Column
+    String duration_string;
+
+    @Column
+    boolean membership_status;
+
+
     @DatabaseField(canBeNull = false, foreign = true)
     Notifications notifications;
 
@@ -71,7 +78,7 @@ public class Memberships {
 
     }*/
 
-    public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications) {
+    public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications, String duration_string, boolean membership_status) {
         this.membership_ID = membership_ID;
         this.member_ID = member_ID;
         this.start_time = start_time;
@@ -82,6 +89,8 @@ public class Memberships {
         this.plan_name = plan_name;
         this.duration_months = duration_months;
         this.notifications = notifications;
+        this.duration_string = duration_string;
+        this.membership_status = membership_status;
     }
 
     public Memberships() {
@@ -143,5 +152,13 @@ public class Memberships {
 
     public int getDuration_months() {
         return duration_months;
+    }
+
+    public String getDuration_string() {
+        return duration_string;
+    }
+
+    public boolean isMembership_status() {
+        return membership_status;
     }
 }
