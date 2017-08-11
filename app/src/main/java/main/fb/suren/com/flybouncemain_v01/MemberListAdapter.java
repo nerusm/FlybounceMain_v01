@@ -126,7 +126,7 @@ public class MemberListAdapter extends ArrayAdapter<MembersAdapterDTO> implement
                filterResults.count = membersAdapterDTOsListCOPY.size();
            } else {
                ArrayList<MembersAdapterDTO> filteredMembersDTO = new ArrayList<MembersAdapterDTO>();
-
+                // loop on copy
                for (MembersAdapterDTO memberDTO : membersAdapterDTOsListCOPY) {
                     if( (memberDTO.getMembers().getMember_name().toLowerCase().contains(constraint.toString().toLowerCase())) || memberDTO.getMembers().getMobile_number().contains(constraint)  ){
                         filteredMembersDTO.add(memberDTO);
