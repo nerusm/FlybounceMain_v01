@@ -60,17 +60,31 @@ public class MemberListAdapter extends ArrayAdapter<MembersAdapterDTO> implement
         return membersAdapterDTOsList.size();
     }
 
+    private boolean isEven(int position){
+        if(position%2 == 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rownView = inflater.inflate(R.layout.list_member_item,parent,false);
+
+
+        View rownView;
+        if(isEven(position)) {
+            rownView = inflater.inflate(R.layout.list_member_item_even, parent, false);
+        } else {
+            rownView = inflater.inflate(R.layout.list_member_item_odd, parent, false);
+        }
 
         TextView textViewMemberName = (TextView) rownView.findViewById(R.id.member_name_item);
         TextView textViewMemberPlan = (TextView) rownView.findViewById(R.id.textView_memberPlan);
         TextView textViewMemberDuration = (TextView) rownView.findViewById(R.id.textView_memberDuration);
         TextView textViewMemberRenewalDate = (TextView) rownView.findViewById(R.id.textView_RenewalDate);
-        Log.i(MainActivity.LOG_TAG,"getView position: "+position);
+       // Log.i(MainActivity.LOG_TAG,"getView position: "+position);
         MembersAdapterDTO membersAdapterDTO = membersAdapterDTOsList.get(position);
 
         Members members = membersAdapterDTO.getMembers();

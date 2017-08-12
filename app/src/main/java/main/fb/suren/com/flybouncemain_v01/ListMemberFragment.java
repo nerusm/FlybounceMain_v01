@@ -75,10 +75,10 @@ public class ListMemberFragment extends Fragment{
 
 
 
-           /* MemberListAdapter memberListAdapter = new MemberListAdapter(getActivity(),R.layout.list_member_item,listOfMembers);
+           /* MemberListAdapter memberListAdapter = new MemberListAdapter(getActivity(),R.layout.list_member_item_odd,listOfMembers);
             listView.setAdapter(memberListAdapter);*/
 
-           final MemberListAdapter memberListAdapter = new MemberListAdapter(getActivity(),R.layout.list_member_item,listOfDTO);
+           final MemberListAdapter memberListAdapter = new MemberListAdapter(getActivity(),R.layout.list_member_item_odd,listOfDTO);
             editTextSearch.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

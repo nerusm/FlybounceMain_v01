@@ -134,7 +134,9 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Court No: " />
+                android:paddingTop="10dp"
+                android:text="Court No: "
+                android:textSize="@dimen/appTextSize" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -156,13 +158,16 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Duration" />
+                android:paddingTop="10dp"
+                android:text="Duration"
+                android:textSize="@dimen/appTextSize" />
 
             <RadioGroup
                 android:id="@+id/radioGroupDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false">
+                android:clickable="false"
+                android:paddingTop="10dp">
 
                 <RadioButton
                     android:id="@+id/radioButton_Monthly"
@@ -200,13 +205,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Plan" />
+                android:paddingTop="10dp"
+                android:text="Plan"
+                android:textSize="@dimen/appTextSize" />
 
             <Spinner
                 android:id="@+id/spinner_PlanSelect"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/Plan_names"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></View>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:paddingTop="10dp"
+                android:text="@string/tPayment_reference"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/editText_PaymentReference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
         </TableRow>
 
         <TableRow
@@ -275,7 +308,6 @@
         android:id="@+id/editTextMultiLine"
         android:layout_width="344dp"
         android:layout_height="495dp"
-        android:layout_marginTop="-2dp"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:text="Hello"

@@ -50,7 +50,7 @@ public class MemberListAdapterBackUp extends ArrayAdapter<Members> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rownView = inflater.inflate(R.layout.list_member_item,parent,false);
+        View rownView = inflater.inflate(R.layout.list_member_item_odd,parent,false);
 
         TextView textViewMemberName = (TextView) rownView.findViewById(R.id.member_name_item);
         TextView textViewMemberPlan = (TextView) rownView.findViewById(R.id.textView_memberPlan);
