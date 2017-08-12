@@ -13,10 +13,10 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+
 import com.j256.ormlite.dao.Dao;
 
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,33 +86,6 @@ public class MemberListAdapter extends ArrayAdapter<MembersAdapterDTO> implement
 
     }
 
-    /*
-    protected DatabaseHelper getHelper() {
-        if (databaseHelper == null) {
-            databaseHelper =
-                    OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
-        }
-        return databaseHelper;
-    }*/
-
-   /* @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rownView = inflater.inflate(R.layout.list_member_item,parent,false);
-
-        TextView textViewMemberName = (TextView) rownView.findViewById(R.id.member_name_item);
-        TextView textViewMemberPlan = (TextView) rownView.findViewById(R.id.textView_memberPlan);
-        TextView textViewMemberDuration = (TextView) rownViewfindViewById(R.id.textView_memberDuration);
-        Members members = membersList.get(position);
-
-        textViewMemberName.setText(members.getMember_name());
-        //textViewMemberPlan.setText(members.get);
-
-        return rownView;
-
-//        return super.getView(position, convertView, parent);
-    }*/
 
    private class MembersFilter extends Filter {
 

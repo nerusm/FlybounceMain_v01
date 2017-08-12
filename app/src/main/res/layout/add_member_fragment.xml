@@ -159,8 +159,10 @@
                 android:text="Duration" />
 
             <RadioGroup
+                android:id="@+id/radioGroupDuration"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radioGroupDuration">
+                android:layout_height="wrap_content"
+                android:clickable="false">
 
                 <RadioButton
                     android:id="@+id/radioButton_Monthly"

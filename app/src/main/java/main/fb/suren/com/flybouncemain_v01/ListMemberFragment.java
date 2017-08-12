@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -43,22 +44,13 @@ public class ListMemberFragment extends Fragment{
         View view = inflater.inflate(R.layout.list_member_fragment,container,false);
         listView = (ListView) view.findViewById(R.id.listView_Members);
         editTextSearch = (EditText) view.findViewById(R.id.editText_SearchMember);
-/*        editTextSearch.addTextChangedListener(new TextWatcher() {
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });*/
+        });
         try {
             membersDao = getHelper().getMembersDAO();
             membershipsesDAO = getHelper().getMembershipDAO();

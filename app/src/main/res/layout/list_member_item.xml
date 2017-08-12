@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="70dp"
-        android:layout_height="65dp"
+        android:layout_width="72dp"
+        android:layout_height="79dp"
         app:srcCompat="@drawable/ic_person_black_24dp"
         tools:layout_editor_absoluteY="8dp"
         android:layout_marginLeft="2dp"
@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/member_name_item"
-        android:layout_width="260dp"
-        android:layout_height="34dp"
+        android:layout_width="261dp"
+        android:layout_height="31dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:paddingTop="10dp"
@@ -72,14 +72,15 @@
 
     <TextView
         android:id="@+id/textView_RenewalDate"
-        android:layout_width="194dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="199dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="82dp"
+        android:layout_marginTop="1dp"
         android:text="Renewal Date: "
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toLeftOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_memberPlan"
+        tools:layout_editor_absoluteX="84dp" />
 
 
 </android.support.constraint.ConstraintLayout>
