@@ -66,6 +66,8 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     Spinner spinner_PlanSelect;
     RadioGroup radioGroupDuration;
     RadioButton radioButtonDurationSelected;
+    private RadioGroup radioGroupMembershipType;
+    private RadioButton radioButtonMembershipType;
 
 
 
@@ -104,6 +106,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         }
     };
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -129,6 +132,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         spinner_CourtSelect = (Spinner) view.findViewById(R.id.spinnerCourtSelect);
         spinner_PlanSelect = (Spinner) view.findViewById(R.id.spinner_PlanSelect);
         radioGroupDuration = (RadioGroup) view.findViewById(R.id.radioGroupDuration);
+        radioGroupMembershipType = (RadioGroup) view.findViewById(R.id.radioGroup_MemberType);
 
         final String inputString = "11-11-2012";
        //final DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -199,6 +203,11 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
                 int sel = radioGroupDuration.getCheckedRadioButtonId();
                 radioButtonDurationSelected = (RadioButton) getActivity().findViewById(sel);
                 String durationString = radioButtonDurationSelected.getText().toString();
+
+                radioButtonMembershipType = (RadioButton) getActivity().findViewById(radioGroupMembershipType.getCheckedRadioButtonId());
+                String membershipTypeString  = radioButtonMembershipType.getText().toString();
+
+
                 startTime = Integer.parseInt( spinner_TimeSelect.getSelectedItem().toString());
                 courtNo = Integer.parseInt(spinner_CourtSelect.getSelectedItem().toString());
                 planName = spinner_PlanSelect.getSelectedItem().toString();
@@ -234,7 +243,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 //public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications) {
                 members = new Members(memberID,name,mobileNo);
                 notifications = new Notifications(membershipID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
-                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications,durationString, true);
+                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications,durationString, true, membershipTypeString);
 
 
              /*   memberships = new Memberships(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
@@ -307,6 +316,8 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
             StringBuffer sb = new StringBuffer("START-\n");
             for (int i = listOfMembers.size()-1;i>=0;i--){
                 sb = sb.append(listOfMembers.get(i).toString());
+                Notifications notification = listOfMembers.get(i).getNotifications();
+                Log.i(MainActivity.LOG_TAG,notification.toString());
 
             }
             Log.i(MainActivity.LOG_TAG,sb.toString());

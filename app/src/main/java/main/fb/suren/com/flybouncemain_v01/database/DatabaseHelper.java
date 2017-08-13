@@ -23,12 +23,36 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "fb_database_beta.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     private static Dao<Members,Integer> membersDAO = null;
     private static Dao<Memberships, Integer> membershipDAO = null;
     private static Dao<Notifications, Integer> notificationsDAO = null;
     private static Dao<Plans,Integer> plansDao= null;
+    private static Dao<Payments,Integer> paymentsDao = null;
+    private static Dao<Players,Integer> playersDao = null;
+    private static Dao<Groups,Integer> groupsDao = null;
+
+    public Dao<Groups, Integer> getGroupsDao() throws SQLException{
+        if(groupsDao == null){
+            groupsDao = getDao(Groups.class);
+        }
+        return groupsDao;
+    }
+
+    public Dao<Payments, Integer> getPaymentsDao() throws  SQLException{
+        if(paymentsDao == null){
+            paymentsDao = getDao(Payments.class);
+        }
+        return paymentsDao;
+    }
+
+    public Dao<Players,Integer> getPlayersDao() throws SQLException{
+        if(playersDao == null){
+            playersDao = getDao(Players.class);
+        }
+        return playersDao;
+    }
 
     public Dao<Plans, Integer> getPlansDao() throws SQLException{
         if(plansDao == null){
@@ -72,6 +96,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource,Memberships.class);
             TableUtils.createTable(connectionSource,Notifications.class);
             TableUtils.createTable(connectionSource,Plans.class);
+            TableUtils.createTable(connectionSource,Payments.class);
+            TableUtils.createTable(connectionSource,Players.class);
+            TableUtils.createTable(connectionSource,Groups.class);
             populatePlans();
 
         } catch (SQLException e) {
@@ -96,12 +123,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource,Memberships.class,true);
             TableUtils.dropTable(connectionSource, Notifications.class,true);
             TableUtils.dropTable(connectionSource, Plans.class,true);
-
+            TableUtils.dropTable(connectionSource,Payments.class,true);
+            TableUtils.dropTable(connectionSource,Players.class,true);
+            TableUtils.dropTable(connectionSource,Groups.class,true);
 
             TableUtils.createTable(connectionSource,Members.class);
             TableUtils.createTable(connectionSource,Memberships.class);
             TableUtils.createTable(connectionSource,Notifications.class);
             TableUtils.createTable(connectionSource,Plans.class);
+            TableUtils.createTable(connectionSource,Payments.class);
+            TableUtils.createTable(connectionSource,Players.class);
+            TableUtils.createTable(connectionSource,Groups.class);
             populatePlans();
             Log.i(MainActivity.LOG_TAG,"Table Upgraded");
         } catch (SQLException e) {

@@ -10,7 +10,7 @@
     <string name="tMobileNo">Mobile No</string>
     <string name="tdor">Registration Date</string>
     <string name="tTime">Start Time</string>
-    <string name="tCourtAvail">Courts Available</string>
+    <string name="tCourtAvail">CAvail</string>
     <string name="tDurationMonthly">Monthly</string>
     <string name="tDurationQuarterly">Quarterly</string>
     <string name="tDurationYearly">Yearly</string>

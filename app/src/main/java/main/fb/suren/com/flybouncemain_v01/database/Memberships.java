@@ -31,10 +31,10 @@ public class Memberships {
     @Column(length = 50,nullable = false)
     String member_ID;
 
-        @Column(length = 2,nullable = false)
+    @Column(length = 2,nullable = false)
     int start_time;
 
-    @Column(length = 2, nullable = false)
+    @Column(length = 2, nullable = true)
     int court_number;
 
     @DatabaseField
@@ -58,6 +58,13 @@ public class Memberships {
     @Column
     boolean membership_status;
 
+    @Column
+    String membership_type;
+
+
+
+
+
 
     @DatabaseField(canBeNull = false, foreign = true)
     Notifications notifications;
@@ -78,7 +85,7 @@ public class Memberships {
 
     }*/
 
-    public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications, String duration_string, boolean membership_status) {
+    public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications, String duration_string, boolean membership_status, String membership_type) {
         this.membership_ID = membership_ID;
         this.member_ID = member_ID;
         this.start_time = start_time;
@@ -91,6 +98,7 @@ public class Memberships {
         this.notifications = notifications;
         this.duration_string = duration_string;
         this.membership_status = membership_status;
+        this.membership_type = membership_type;
     }
 
     public Memberships() {
