@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_add_member) {
             fragment = new AddMemberFragment();
-        } else if (id == R.id.nav_add_group) {
-
+        } else if (id == R.id.nav_list_groups) {
+            fragment = new ListGroupsFragment();
         } else if (id == R.id.nav_showmember) {
 
         } else if (id == R.id.nav_listmembers) {

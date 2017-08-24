@@ -8,6 +8,8 @@ import com.j256.ormlite.field.DatabaseField;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+@Entity(name = "groups")
+
 public class Groups {
     @DatabaseField(generatedId = true)
     int id;
@@ -20,4 +22,7 @@ public class Groups {
 
     @Column
     int no_of_players;
+
+    @DatabaseField
+    Players players;
 }

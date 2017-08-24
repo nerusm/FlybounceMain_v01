@@ -6,6 +6,9 @@ package main.fb.suren.com.flybouncemain_v01.database;
 
 import java.util.Date;
 import com.j256.ormlite.field.DatabaseField;
+
+import org.hibernate.annotations.ForeignKey;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -15,7 +18,7 @@ public class Players {
     @DatabaseField(generatedId = true)
     int id;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = true)
     String membership_ID;
 
     @Column
@@ -24,6 +27,6 @@ public class Players {
     @Column
     String player_name;
 
-    @Column
+    @DatabaseField
     String group_id;
 }

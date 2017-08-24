@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_GroupNameListItem"
+        android:layout_width="310dp"
+        android:layout_height="35dp"
+        android:paddingTop="8dp"
+        android:textSize="@dimen/appTextSize"
+        tools:layout_editor_absoluteY="0dp"
+        android:layout_marginLeft="3dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBox_GroupItemSelected"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="1dp"
+        android:paddingLeft="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_GroupNameListItem"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintLeft_toRightOf="@+id/textView_GroupNameListItem"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
