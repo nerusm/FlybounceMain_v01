@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Views;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -22,9 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Members;
-import main.fb.suren.com.flybouncemain_v01.database.Memberships;
+import main.fb.suren.com.flybouncemain_v01.MainActivity;
+import main.fb.suren.com.flybouncemain_v01.Adapters.MemberListAdapter;
+import main.fb.suren.com.flybouncemain_v01.Adapters.MembersAdapterDTO;
+import main.fb.suren.com.flybouncemain_v01.Models.Member;
+import main.fb.suren.com.flybouncemain_v01.R;
+import main.fb.suren.com.flybouncemain_v01.Database.DatabaseHelper;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
 
 /**
  * Created by suren on 9/8/17.
@@ -33,7 +37,7 @@ import main.fb.suren.com.flybouncemain_v01.database.Memberships;
 public class ListMemberFragment extends Fragment{
 
     private DatabaseHelper databaseHelper = null;
-    private Dao<Members, Integer> membersDao;
+    private Dao<Member, Integer> membersDao;
     private Dao<Memberships,Integer> membershipsesDAO;
     private ListView listView;
     private EditText editTextSearch;
@@ -54,7 +58,7 @@ public class ListMemberFragment extends Fragment{
         try {
             membersDao = getHelper().getMembersDAO();
             membershipsesDAO = getHelper().getMembershipDAO();
-            List<Members> listOfMembers = membersDao.queryForAll();
+            List<Member> listOfMembers = membersDao.queryForAll();
 
             List<MembersAdapterDTO> listOfDTO = new ArrayList<>();
             for(int i = 0; i<listOfMembers.size(); i++){

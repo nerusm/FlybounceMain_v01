@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01.database;
+package main.fb.suren.com.flybouncemain_v01.Models;
 
 import com.j256.ormlite.field.DatabaseField;
 
@@ -6,9 +6,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import main.fb.suren.com.flybouncemain_v01.MainActivity;
-import main.fb.suren.com.flybouncemain_v01.Utils;
 
 /**
  * Created by suren on 5/8/17.

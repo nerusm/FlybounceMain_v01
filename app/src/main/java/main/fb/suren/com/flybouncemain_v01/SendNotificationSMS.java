@@ -14,9 +14,9 @@ import com.j256.ormlite.dao.Dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Memberships;
-import main.fb.suren.com.flybouncemain_v01.database.Notifications;
+import main.fb.suren.com.flybouncemain_v01.Database.DatabaseHelper;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
+import main.fb.suren.com.flybouncemain_v01.Models.Notifications;
 
 
 /**

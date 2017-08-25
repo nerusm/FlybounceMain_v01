@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Utilities;
 
 import android.app.Activity;
 import android.app.PendingIntent;

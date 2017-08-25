@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Views;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -33,10 +33,15 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Members;
-import main.fb.suren.com.flybouncemain_v01.database.Memberships;
-import main.fb.suren.com.flybouncemain_v01.database.Notifications;
+import main.fb.suren.com.flybouncemain_v01.Utilities.GenerationClass;
+import main.fb.suren.com.flybouncemain_v01.MainActivity;
+import main.fb.suren.com.flybouncemain_v01.R;
+import main.fb.suren.com.flybouncemain_v01.SendNotificationSMS;
+import main.fb.suren.com.flybouncemain_v01.Utilities.Utils;
+import main.fb.suren.com.flybouncemain_v01.Database.DatabaseHelper;
+import main.fb.suren.com.flybouncemain_v01.Models.Member;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
+import main.fb.suren.com.flybouncemain_v01.Models.Notifications;
 
 import static android.content.Context.ALARM_SERVICE;
 
@@ -49,7 +54,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
     private DatabaseHelper databaseHelper = null;
     private Dao<Memberships,Integer> membershipsesDAO;
     private Dao<Notifications,Integer> notificationsDao;
-    private Dao<Members, Integer> membersDao;
+    private Dao<Member, Integer> membersDao;
 
     EditText editText_Membername;
     EditText editText_MobileNumber;
@@ -71,7 +76,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
 
 
-    Members members;
+    Member member;
     Memberships memberships;
     Notifications notifications;
     List<String> listHours = new ArrayList<String>();
@@ -241,9 +246,9 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
                 String memberID = new GenerationClass().formMemberID(name,mobileNo);
                 String membershipID = new GenerationClass().formMembershipID(memberID,planName);
 //public Memberships(String membership_ID, String member_ID, int start_time, int court_number, Date start_date, Date end_date, int renewal_count, String plan_name, int duration_months, Notifications notifications) {
-                members = new Members(memberID,name,mobileNo);
+                member = new Member(memberID,name,mobileNo);
                 notifications = new Notifications(membershipID,myUtils.subtractDate(endDate,getResources().getInteger(R.integer.notification_advance_days)),0,true);
-                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications,durationString, true, membershipTypeString);
+                memberships = new Memberships(membershipID,memberID,startTime,courtNo,inputDate,endDate,0,planName,durationMonthsInt,notifications,durationString, true, membershipTypeString, member);
 
 
              /*   memberships = new Memberships(memberID,name,mobileInt,inputDate,endDate, startTime, courtNo,
@@ -251,7 +256,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
 
 
                 try {
-                    membersDao.create(members);
+                    membersDao.create(member);
                     notificationsDao.create(notifications);
                     membershipsesDAO.create(memberships);
 

@@ -15,6 +15,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import main.fb.suren.com.flybouncemain_v01.Views.AddMemberFragment;
+import main.fb.suren.com.flybouncemain_v01.Views.ListGroupsFragment;
+import main.fb.suren.com.flybouncemain_v01.Views.ListMemberFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

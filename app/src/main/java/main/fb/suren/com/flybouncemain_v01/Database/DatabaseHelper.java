@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01.database;
+package main.fb.suren.com.flybouncemain_v01.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,8 +11,14 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
-import main.fb.suren.com.flybouncemain_v01.ADTO;
 import main.fb.suren.com.flybouncemain_v01.MainActivity;
+import main.fb.suren.com.flybouncemain_v01.Models.Groups;
+import main.fb.suren.com.flybouncemain_v01.Models.Member;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
+import main.fb.suren.com.flybouncemain_v01.Models.Notifications;
+import main.fb.suren.com.flybouncemain_v01.Models.Payments;
+import main.fb.suren.com.flybouncemain_v01.Models.Plans;
+import main.fb.suren.com.flybouncemain_v01.Models.Players;
 
 /**
  * Created by suren on 17/7/17.
@@ -23,9 +29,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "fb_database_beta.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
 
-    private static Dao<Members,Integer> membersDAO = null;
+    private static Dao<Member,Integer> membersDAO = null;
     private static Dao<Memberships, Integer> membershipDAO = null;
     private static Dao<Notifications, Integer> notificationsDAO = null;
     private static Dao<Plans,Integer> plansDao= null;
@@ -60,9 +66,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return plansDao;
     }
-    public Dao<Members, Integer> getMembersDAO() throws SQLException{
+    public Dao<Member, Integer> getMembersDAO() throws SQLException{
         if(membersDAO == null){
-            membersDAO = getDao(Members.class);
+            membersDAO = getDao(Member.class);
         }
         return membersDAO;
     }
@@ -92,7 +98,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
 
         try {
-            TableUtils.createTable(connectionSource,Members.class);
+            TableUtils.createTable(connectionSource,Member.class);
             TableUtils.createTable(connectionSource,Memberships.class);
             TableUtils.createTable(connectionSource,Notifications.class);
             TableUtils.createTable(connectionSource,Plans.class);
@@ -119,7 +125,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             Log.i(MainActivity.LOG_TAG,"In Upgrade");
-            TableUtils.dropTable(connectionSource,Members.class, true);
+            TableUtils.dropTable(connectionSource,Member.class, true);
             TableUtils.dropTable(connectionSource,Memberships.class,true);
             TableUtils.dropTable(connectionSource, Notifications.class,true);
             TableUtils.dropTable(connectionSource, Plans.class,true);
@@ -127,7 +133,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource,Players.class,true);
             TableUtils.dropTable(connectionSource,Groups.class,true);
 
-            TableUtils.createTable(connectionSource,Members.class);
+            TableUtils.createTable(connectionSource,Member.class);
             TableUtils.createTable(connectionSource,Memberships.class);
             TableUtils.createTable(connectionSource,Notifications.class);
             TableUtils.createTable(connectionSource,Plans.class);

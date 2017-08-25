@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Views;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import main.fb.suren.com.flybouncemain_v01.MainActivity;
+import main.fb.suren.com.flybouncemain_v01.R;
 
 /**
  * Created by suren on 25/7/17.

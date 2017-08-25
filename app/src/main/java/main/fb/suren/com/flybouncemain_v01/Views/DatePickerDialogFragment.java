@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Views;
 
 /**
  * Created by suren on 18/7/17.

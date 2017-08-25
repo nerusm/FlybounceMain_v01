@@ -32,9 +32,9 @@
         android:id="@+id/imageButton_AddGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="@+id/editText_SearchGroup"
-        app:layout_constraintLeft_toRightOf="@+id/imageButton_DeleteGroup" />
+        app:layout_constraintLeft_toRightOf="@+id/imageButton_DeleteGroup"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <ListView
         android:layout_width="344dp"

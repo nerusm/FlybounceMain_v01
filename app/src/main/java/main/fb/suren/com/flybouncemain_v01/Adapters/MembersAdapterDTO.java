@@ -1,7 +1,7 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Adapters;
 
-import main.fb.suren.com.flybouncemain_v01.database.Members;
-import main.fb.suren.com.flybouncemain_v01.database.Memberships;
+import main.fb.suren.com.flybouncemain_v01.Models.Member;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
 
 /**
  * Created by suren on 10/8/17.
@@ -9,17 +9,17 @@ import main.fb.suren.com.flybouncemain_v01.database.Memberships;
 
 public class MembersAdapterDTO {
     private Memberships memberships;
-    private Members members;
+    private Member members;
     private boolean hasMembership;
 
-    public MembersAdapterDTO(Members members, Memberships memberships, boolean hasMembership){
+    public MembersAdapterDTO(Member members, Memberships memberships, boolean hasMembership){
         this.memberships = memberships;
         this.members = members;
         this.hasMembership = hasMembership;
     }
 
 
-    public MembersAdapterDTO(Members members, boolean hasMembership){
+    public MembersAdapterDTO(Member members, boolean hasMembership){
         this.members = members;
         this.hasMembership = hasMembership;
     }
@@ -28,7 +28,7 @@ public class MembersAdapterDTO {
         return memberships;
     }
 
-    public Members getMembers() {
+    public Member getMembers() {
         return members;
     }
 

@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01.database;
+package main.fb.suren.com.flybouncemain_v01.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

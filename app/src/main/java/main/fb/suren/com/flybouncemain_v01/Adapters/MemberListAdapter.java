@@ -1,4 +1,4 @@
-package main.fb.suren.com.flybouncemain_v01;
+package main.fb.suren.com.flybouncemain_v01.Adapters;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -20,9 +20,12 @@ import com.j256.ormlite.dao.Dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.fb.suren.com.flybouncemain_v01.database.DatabaseHelper;
-import main.fb.suren.com.flybouncemain_v01.database.Members;
-import main.fb.suren.com.flybouncemain_v01.database.Memberships;
+import main.fb.suren.com.flybouncemain_v01.MainActivity;
+import main.fb.suren.com.flybouncemain_v01.Models.Member;
+import main.fb.suren.com.flybouncemain_v01.R;
+import main.fb.suren.com.flybouncemain_v01.Utilities.Utils;
+import main.fb.suren.com.flybouncemain_v01.Database.DatabaseHelper;
+import main.fb.suren.com.flybouncemain_v01.Models.Memberships;
 
 /**
  * Created by suren on 9/8/17.
@@ -87,7 +90,7 @@ public class MemberListAdapter extends ArrayAdapter<MembersAdapterDTO> implement
        // Log.i(MainActivity.LOG_TAG,"getView position: "+position);
         MembersAdapterDTO membersAdapterDTO = membersAdapterDTOsList.get(position);
 
-        Members members = membersAdapterDTO.getMembers();
+        Member members = membersAdapterDTO.getMembers();
         Memberships memberships = membersAdapterDTO.getMemberships();
 
         textViewMemberName.setText(members.getMember_name());
