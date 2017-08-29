@@ -6,8 +6,6 @@ package main.fb.suren.com.flybouncemain_v01.Models;
 
 import com.j256.ormlite.field.DatabaseField;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -18,7 +16,7 @@ public class Member {
     int id;
 
     @Column
-    String member_id;
+    String _memberID;
 
     @Column
     String member_name;
@@ -30,14 +28,14 @@ public class Member {
     public String toString() {
         return "Member{" +
                 "id=" + id +
-               ", member_id='" + member_id + '\'' +
+               ", _memberID='" + _memberID + '\'' +
                 ", member_name='" + member_name + '\'' +
                 ", mobile_number=" + mobile_number +
                 '}';
     }
 
-    public String getMember_id() {
-        return member_id;
+    public String get_memberID() {
+        return _memberID;
     }
 
     public String getMember_name() {
@@ -51,8 +49,8 @@ public class Member {
     public Member() {
     }
 
-    public Member(String member_id, String member_name, String mobile_number) {
-        //this.member_id = member_id;
+    public Member(String _memberID, String member_name, String mobile_number) {
+        this._memberID = _memberID;
         this.member_name = member_name;
         this.mobile_number = mobile_number;
     }

@@ -70,7 +70,7 @@ public class Memberships {
     Notifications notifications;
 
 
-/*    public Memberships(String memberID, String member_name, int mobile_number, Date startDate, Date endDate, int startTime, int courtNo, String targetDatePattern, Notifications notifications, int renewalCount) {
+/*    public Memberships(String membership_ID, String member_name, int mobile_number, Date startDate, Date endDate, int startTime, int courtNo, String targetDatePattern, Notifications notifications, int renewalCount) {
 
         this.targetDatePattern = targetDatePattern;
         this.member_name = member_name;
@@ -79,7 +79,7 @@ public class Memberships {
         this.endDate = endDate;
         this.startTime = startTime;
         this.courtNo = courtNo;
-        this.memberID = memberID;
+        this.membership_ID = membership_ID;
         this.notifications = notifications;
         this.renewalCount = renewalCount;
 

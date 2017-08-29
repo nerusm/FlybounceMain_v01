@@ -20,7 +20,7 @@ public class Notifications {
 
     @DatabaseField
     @Column(length = 50, nullable = false)
-    String memberID;
+    String membership_ID;
 
     @DatabaseField
     Date notificationDate;
@@ -35,8 +35,8 @@ public class Notifications {
 
 
 
-    public Notifications(String memberID, Date notificationDate, int noOfNotiticationsSent, boolean sendNotification) {
-        this.memberID = memberID;
+    public Notifications(String membership_ID, Date notificationDate, int noOfNotiticationsSent, boolean sendNotification) {
+        this.membership_ID = membership_ID;
         this.notificationDate = notificationDate;
         this.noOfNotiticationsSent = noOfNotiticationsSent;
         this.sendNotification = sendNotification;
@@ -46,7 +46,7 @@ public class Notifications {
     public String toString() {
         return "Notifications{" +
                 "id=" + id +
-                ", memberID='" + memberID + '\'' +
+                ", membership_ID='" + membership_ID + '\'' +
                 ", notificationDate=" + notificationDate +
                 '}';
     }
@@ -58,8 +58,8 @@ public class Notifications {
         return id;
     }
 
-    public String getMemberID() {
-        return memberID;
+    public String getMembership_ID() {
+        return membership_ID;
     }
 
     public Date getNotificationDate() {

@@ -184,7 +184,7 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
             @Override
             public void onClick(View view) {
                 Log.i(MainActivity.LOG_TAG,"Populate");
-                populateViewMember(membershipsesDAO);
+                populateViewMember(membershipsesDAO,notificationsDao, membersDao);
                 FragmentManager manager  = getFragmentManager();
                 Fragment fragment = manager.findFragmentByTag("fragment_dialog");
                 if(fragment != null){
@@ -314,16 +314,19 @@ public class AddMemberFragment extends Fragment implements MyDialogFragment.User
         }
     }
 
-    private void populateViewMember(Dao<Memberships, Integer> memberDAO) {
+    private void populateViewMember(Dao<Memberships, Integer> membershipsIntegerDao, Dao<Notifications,Integer> notificationsDao,
+                                    Dao<Member, Integer> membersDao ) {
         try {
-            List<Memberships> listOfMembers = memberDAO.queryForAll();
+            List<Memberships> listOfMembers = membershipsIntegerDao.queryForAll();
             Log.i(MainActivity.LOG_TAG,"Size: "+listOfMembers.size());
             StringBuffer sb = new StringBuffer("START-\n");
             for (int i = listOfMembers.size()-1;i>=0;i--){
-                sb = sb.append(listOfMembers.get(i).toString());
-                Notifications notification = listOfMembers.get(i).getNotifications();
-                Log.i(MainActivity.LOG_TAG,notification.toString());
-
+                Memberships membership = listOfMembers.get(i);
+                sb = sb.append(membership.toString());
+                notificationsDao.refresh(membership.getNotifications());
+                membersDao.refresh(membership.getMember());
+                Log.i(MainActivity.LOG_TAG,"NOTIFICATION_2: "+membership.getNotifications().toString());
+                Log.i(MainActivity.LOG_TAG,"Members_2: "+membership.getMember().toString());
             }
             Log.i(MainActivity.LOG_TAG,sb.toString());
             editText_MultiLine.setText(sb.toString());

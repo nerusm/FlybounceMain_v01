@@ -36,7 +36,7 @@ public class SendNotificationSMS  extends Service{
             List<Notifications> notificationsList = notificationsDao.queryForAll();
             for(int i = notificationsList.size()-1; i >=0; i--){
                 /*Notifications notification = notificationsList.get(i);
-                List<Memberships> membersList = membershipDAO.queryBuilder().where().eq("memberID",notification.getMemberID()).query();
+                List<Memberships> membersList = membershipDAO.queryBuilder().where().eq("memberID",notification.getMembership_ID()).query();
                 for (int j = 0; j < membersList.size(); j++){
                     int mobileNo = membersList.get(j).getMobile_number();
                     sendSMS(mobileNo,membersList.get(j).getEndDate().toString());

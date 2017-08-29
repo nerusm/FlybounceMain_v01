@@ -65,7 +65,7 @@ public class ListMemberFragment extends Fragment{
 
                 MembersAdapterDTO membersAdapterDTO;
                 Map fieldValues = new HashMap();
-                fieldValues.put("member_ID",listOfMembers.get(i).getMember_id());
+                fieldValues.put("member_ID",listOfMembers.get(i).get_memberID());
                 fieldValues.put("membership_status",true);
                 List<Memberships> membershipForMember = membershipsesDAO.queryForFieldValues(fieldValues);
                 if(membershipForMember.size() > 0) {
